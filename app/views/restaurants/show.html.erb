@@ -1,0 +1,20 @@
+<h1><%= @restaurant.name %></h1>
+
+<%= image_tag "https://maps.googleapis.com/maps/api/staticmap?zoom=15&size=800x800&sensor=false&maptype=roadmap&markers=color:red|#{@restaurant.address}" %>
+
+<% if @restaurant.reviews.none? %>
+  <p>Be the first to leave a review</p>
+<% else %>
+  <p><%= pluralize @restaurant.reviews.count, "review" %></p>
+<% end %>
+
+<ul id="reviews-list">
+  <% @restaurant.reviews.each do |review| %>
+    <li><%= review.content %></li>
+  <% end %>
+</ul>
+
+
+<div id="review-form">
+  <%= render("reviews/form", restaurant: @restaurant, review: @review) %> 
+</div>
